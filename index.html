@@ -13,21 +13,22 @@
         <h1>Tic Tac Toe</h1>
         <table>
         <tr>
-            <td align="center"><span class="marker">X</span></td>
-            <td align="center" class="vert"><span class="marker">O</span></td>
-            <td align="center"><span class="marker">O</span></td>
+            <td align="center" onclick="GamePlay.makeMove(0)"><span class="marker" id="0"></span></td>
+            <td align="center" class="vert" onclick="GamePlay.makeMove(1)"><span class="marker" id="1"></span></td>
+            <td align="center" onclick="GamePlay.makeMove(2)"><span class="marker" id="2"></span></td>
         </tr>
         <tr>
-            <td align="center" class="hori"><span class="marker">O</span></td>
-            <td align="center" class="vert hori"><span class="marker">X</span></td>
-            <td align="center" class="hori"><span class="marker">X</span></td>
+            <td align="center" class="hori" onclick="GamePlay.makeMove(3)"><span class="marker" id="3"></span></td>
+            <td align="center" class="vert hori" onclick="GamePlay.makeMove(4)"><span class="marker" id="4"></span></td>
+            <td align="center" class="hori" onclick="GamePlay.makeMove(5)"><span class="marker" id="5"></span></td>
         </tr>
         <tr>
-            <td align="center"><span class="marker">X</span></td>
-            <td align="center" class="vert"><span class="marker">X</span></td>
-            <td align="center"><span class="marker">O</span></td>
+            <td align="center" onclick="GamePlay.makeMove(6)"><span class="marker" id="6"></span></td>
+            <td align="center" class="vert" onclick="GamePlay.makeMove(7)"><span class="marker" id="7"></span></td>
+            <td align="center" onclick="GamePlay.makeMove(8)"><span class="marker" id="8"></span></td>
         </tr>
         </table>
+        <button class="btn-clear" id="clear">clear</button>
      </div>
 </body>
 <script src="assets/scripts/game.js"></script>
