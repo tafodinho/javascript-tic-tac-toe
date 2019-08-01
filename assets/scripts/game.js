@@ -1,9 +1,23 @@
+const Player = () => {
+    let marker = "X"
+    const getMarker = () => marker
+    const switchPlayer = () => {
+        if(marker === "X") {
+            marker = "O"
+        } else {
+            marker = "X"
+        }
+        console.log(marker)
+    }
+    return { marker, switchPlayer, getMarker }
+}
+
 const GameBoard = (() => {
-    const moves = ["", "", "", "", "", "", "", "", ""]
-    const clearButton = document.getElementById(".clear")
+    let moves = ["", "", "", "", "", "", "", "", ""]
+    const currentPlayer = Player()
     const play = (n) => {
-        moves[n] = Player.currentPlayer
-        Player.switchPlayer()
+        moves[n] = currentPlayer.getMarker()
+        currentPlayer.switchPlayer()
     }
     const render = () => {
         moves.forEach((value, index) => {
@@ -11,25 +25,18 @@ const GameBoard = (() => {
             document.getElementById(boxId).innerHTML = value
         })
     }
+    const clearBoard = () => {
+        moves = ["", "", "", "", "", "", "", "", ""]
+        GameBoard.render()
+    }
 
     return { 
                 moves,
                 render,
-                play
+                play, 
+                currentPlayer,
+                clearBoard
            }
-})()
-
-const Player = (() => {
-    let currentPlayer = "X"
-    const switchPlayer = () => {
-        if(currentPlayer === "X") {
-            currentPlayer = "O"
-        } else {
-            currentPlayer = "X"
-        }
-        console.log(currentPlayer)
-    }
-    return { currentPlayer, switchPlayer }
 })()
 
 const GamePlay = (() => {
