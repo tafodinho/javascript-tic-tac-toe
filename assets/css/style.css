@@ -9,16 +9,16 @@ h1 {
     margin: 5px auto;
   }
   .vert {
-    border-left: 2px solid black;
-    border-right: 2px solid black;
+    border-left: 2px solid #01bbc2;
+    border-right: 2px solid #01bbc2;
   }
   .hori {
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
+    border-top: 2px solid #01bbc2;
+    border-bottom: 2px solid #01bbc2;
   }
   .marker {
       text-align: center;
-      color: red;
+      color: #f1be32;
       font-weight: 800;
-      font-size: 30px;
+      font-size: 50px;
   }
