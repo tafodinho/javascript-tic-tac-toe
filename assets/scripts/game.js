@@ -79,7 +79,7 @@ const GamePlay = (() => {
                 if(isWinner()) {
                     GameBoard.putMessage(winningString)
                 } else if (isDraw()) {
-    
+                    GameBoard.putMessage("Draw Game")
                 }
             }
             GameBoard.currentPlayer.switchPlayer()
@@ -108,7 +108,16 @@ const GamePlay = (() => {
         return result
     }
     const isDraw = () => {
-
+        let counter = 0
+        GameBoard.moves.forEach((value, index) => {
+            if(value !== "") {
+                counter++
+            }
+        })
+        if(counter === 9) {
+            return true
+        }
+        return false
     }
     const clear = () => {
         GameBoard.clearBoard()
