@@ -77,13 +77,15 @@ const GameBoard = (() => {
 const GamePlay = (() => {
     let finish = false
     const makeMove = (n) => {
-        GameBoard.play(n)
-        GameBoard.render()
+        if(!finish) {
+            GameBoard.play(n)
+            GameBoard.render()
+        }
         const winningString = `Player ${GameBoard.currentPlayer.getMarker()} wins`
         if(isWinner()) {
             GameBoard.putMessage(winningString)
         } else if (isDraw()) {
-            
+
         }
         GameBoard.currentPlayer.switchPlayer()
     }
