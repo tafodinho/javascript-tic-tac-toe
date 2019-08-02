@@ -26,13 +26,7 @@ const GameBoard = (() => {
                                 ]
     const currentPlayer = Player()
     const play = (n) => {
-        if(isEmptyCell(n)) {
-            moves[n] = currentPlayer.getMarker()
-            clearMessage()
-        } else {
-            putMessage("select Empty cell")
-        }
-        
+        moves[n] = currentPlayer.getMarker()
     }
     const putMessage = msg => {
         document.getElementById("message").innerHTML = msg
@@ -40,7 +34,7 @@ const GameBoard = (() => {
     const clearMessage = () => {
         document.getElementById("message").innerHTML = ""
     }
-    const isEmptyCell = (i) => {
+    const isValidMove = (i) => {
         if(moves[i] === "") {
             return true
         } else {
@@ -57,40 +51,45 @@ const GameBoard = (() => {
         moves = ["", "", "", "", "", "", "", "", ""]
         render()
     }
-    
-    const freeze = () => {
-        
-    }
+    const getMoves = () => moves
 
     return { 
                 moves,
+                getMoves,
                 render,
                 play, 
                 currentPlayer,
                 clearBoard,
                 putMessage,
                 clearMessage,
-                winningCombination
+                winningCombination, 
+                isValidMove
            }
 })()
 
 const GamePlay = (() => {
     let finish = false
     const makeMove = (n) => {
-        if(!finish) {
-            GameBoard.play(n)
-            GameBoard.render()
+        console.log(GameBoard.isValidMove(n))
+        if(GameBoard.isValidMove(n)) {
+            if(!finish) {
+                GameBoard.play(n)
+                GameBoard.render()
+                const winningString = `Player ${GameBoard.currentPlayer.getMarker()} wins`
+                if(isWinner()) {
+                    GameBoard.putMessage(winningString)
+                } else if (isDraw()) {
+    
+                }
+            }
+            GameBoard.currentPlayer.switchPlayer()
+        } else {
+            GameBoard.putMessage("Play in empty cell")
         }
-        const winningString = `Player ${GameBoard.currentPlayer.getMarker()} wins`
-        if(isWinner()) {
-            GameBoard.putMessage(winningString)
-        } else if (isDraw()) {
-
-        }
-        GameBoard.currentPlayer.switchPlayer()
     }
     const isWinner = () => {
         let counter = 0
+        let result = false
         GameBoard.winningCombination.forEach((value, index) => {
             value.forEach((value1, index1) => {
                 if(GameBoard.moves[value1] === GameBoard.currentPlayer.getMarker()) {
@@ -101,14 +100,23 @@ const GamePlay = (() => {
             if(counter === 3) {
                 console.log(`Player ${GameBoard.currentPlayer.getMarker()} wins`)
                 finish = true
+                result = true
                 return true
             }
             counter = 0
         })
-        return false
+        return result
     }
     const isDraw = () => {
 
     }
-    return { makeMove }
+    const clear = () => {
+        GameBoard.clearBoard()
+        console.log(GameBoard.getMoves())
+        finish = false
+    }
+    return { 
+                makeMove,
+                clear
+            }
 })()
