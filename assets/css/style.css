@@ -1,6 +1,6 @@
 h1 {
     text-align: center;
-  }
+}
   td {
     width: 100px;
     height: 100px;
@@ -37,4 +37,8 @@ h1 {
   }
   td:hover {
       cursor: pointer
+  }
+  .message {
+      text-align: center;
+      color: #d54e41;
   }
