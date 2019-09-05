@@ -4,10 +4,11 @@ document.getElementById('player-name').addEventListener('keypress', (e) => {
         playerName = e.target.value
         e.target.value = ''
         document.getElementById('player').innerHTML = playerName
+        Display.putMessage(`Start ${playerName}`)
     }
 })
 
-const Player = () => {
+const Player = (() => {
     let playerOject = {name: playerName, marker: 'X'}
 
     const getMarker = () => playerOject.marker
@@ -26,7 +27,7 @@ const Player = () => {
         getMarker,
         getPlayerName 
     }
-}
+})()
 
 const GameBoard = (() => {
     let moves = ["", "", "", "", "", "", "", "", ""]
@@ -41,7 +42,7 @@ const GameBoard = (() => {
                                     [2,5,8],
                                     [2,4,6]
                                 ]
-    const currentPlayer = Player()
+    const currentPlayer = Player
     const play = (n) => {
         moves[n] = currentPlayer.getMarker()
     }
