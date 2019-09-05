@@ -42,3 +42,9 @@ h1 {
       text-align: center;
       color: #d54e41;
   }
+  .input {
+    text-align: center;
+  }
+  .input input {
+    width: 400px;
+  }

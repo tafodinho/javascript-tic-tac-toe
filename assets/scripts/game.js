@@ -1,14 +1,31 @@
+let playerName = ""
+document.getElementById('player-name').addEventListener('keypress', (e) => {
+    if(e.keyCode === 13) {
+        playerName = e.target.value
+        e.target.value = ''
+        document.getElementById('player').innerHTML = playerName
+    }
+})
+
 const Player = () => {
-    let marker = "X"
-    const getMarker = () => marker
+    let playerOject = {name: playerName, marker: 'X'}
+
+    const getMarker = () => playerOject.marker
+    const getPlayerName = () => playerOject.name
     const switchPlayer = () => {
-        if(marker === "X") {
-            marker = "O"
+        if(playerOject.marker === "X") {
+            playerOject.marker = "O"
+            playerOject.name = "Player 2"
         } else {
-            marker = "X"
+            playerOject.marker = "X"
+            playerOject.name = playerName
         }
     }
-    return { marker, switchPlayer, getMarker }
+    return { 
+        switchPlayer, 
+        getMarker,
+        getPlayerName 
+    }
 }
 
 const GameBoard = (() => {
@@ -28,12 +45,7 @@ const GameBoard = (() => {
     const play = (n) => {
         moves[n] = currentPlayer.getMarker()
     }
-    const putMessage = msg => {
-        document.getElementById("message").innerHTML = msg
-    }
-    const clearMessage = () => {
-        document.getElementById("message").innerHTML = ""
-    }
+    
     const isValidMove = (i) => {
         if(moves[i] === "") {
             return true
@@ -41,51 +53,67 @@ const GameBoard = (() => {
             return false
         }
     }
-    const render = () => {
-        moves.forEach((value, index) => {
-            let boxId = `${index.toString()}`
-            document.getElementById(boxId).innerHTML = value
-        })
-    }
-    const clearBoard = () => {
-        moves = ["", "", "", "", "", "", "", "", ""]
-        render()
-    }
+    
     const getMoves = () => moves
 
     return { 
                 moves,
                 getMoves,
-                render,
                 play, 
                 currentPlayer,
-                clearBoard,
-                putMessage,
-                clearMessage,
                 winningCombination, 
                 isValidMove
            }
 })()
 
+const Display = (() => {
+    const putMessage = msg => {
+        document.getElementById("message").innerHTML = msg
+    }
+    const clearMessage = () => {
+        document.getElementById("message").innerHTML = ""
+    }
+    const render = () => {
+        GameBoard.moves.forEach((value, index) => {
+            let boxId = `${index.toString()}`
+            document.getElementById(boxId).innerHTML = value
+        })
+    }
+    const clearBoard = () => {
+        GameBoard.moves = ["", "", "", "", "", "", "", "", ""]
+        render()
+    }
+
+    return {
+        putMessage,
+        clearBoard,
+        clearMessage,
+        render
+    }
+})()
+
+
 const GamePlay = (() => {
-    let finish = false
+    let finished = false
     const makeMove = (n) => {
-        console.log(GameBoard.isValidMove(n))
-        if(GameBoard.isValidMove(n)) {
-            if(!finish) {
+        if(!finished && playerName !== "") {
+            if(GameBoard.isValidMove(n)) {
                 GameBoard.play(n)
-                GameBoard.render()
-                const winningString = `Player ${GameBoard.currentPlayer.getMarker()} wins`
+                Display.render()
+                const winningString = `Player ${GameBoard.currentPlayer.getPlayerName()} wins`
                 if(isWinner()) {
-                    GameBoard.putMessage(winningString)
+                    Display.putMessage(winningString)
+                    return
                 } else if (isDraw()) {
-                    GameBoard.putMessage("Draw Game")
+                    Display.putMessage("Draw Game")
                 }
+                GameBoard.currentPlayer.switchPlayer()
+                Display.putMessage(`Next ${GameBoard.currentPlayer.getPlayerName()}`)
             }
-            GameBoard.currentPlayer.switchPlayer()
-        } else {
-            GameBoard.putMessage("Play in empty cell")
-        }
+            else {
+                Display.putMessage("Play in empty cell")
+            }
+        } 
     }
     const isWinner = () => {
         let counter = 0
@@ -93,13 +121,11 @@ const GamePlay = (() => {
         GameBoard.winningCombination.forEach((value, index) => {
             value.forEach((value1, index1) => {
                 if(GameBoard.moves[value1] === GameBoard.currentPlayer.getMarker()) {
-                    console.log(`${GameBoard.moves[index1]} -> ${GameBoard.currentPlayer.getMarker()}`)
                     counter++
                 }
             })
             if(counter === 3) {
-                console.log(`Player ${GameBoard.currentPlayer.getMarker()} wins`)
-                finish = true
+                finished = true
                 result = true
                 return true
             }
@@ -120,7 +146,7 @@ const GamePlay = (() => {
         return false
     }
     const clear = () => {
-        GameBoard.clearBoard()
+        Display.clearBoard()
         console.log(GameBoard.getMoves())
         finish = false
     }
