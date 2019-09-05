@@ -148,7 +148,6 @@ const GamePlay = (() => {
     }
     const clear = () => {
         Display.clearBoard()
-        console.log(GameBoard.getMoves())
         finish = false
     }
     return { 
