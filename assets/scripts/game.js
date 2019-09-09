@@ -107,6 +107,7 @@ const GamePlay = (() => {
                     return
                 } else if (isDraw()) {
                     Display.putMessage("Draw Game")
+                    return
                 }
                 GameBoard.currentPlayer.switchPlayer()
                 Display.putMessage(`Next ${GameBoard.currentPlayer.getPlayerName()}`)
@@ -142,10 +143,12 @@ const GamePlay = (() => {
             }
         })
         if(counter === 9) {
+            console.log("draw game")
             return true
         }
         return false
     }
+
     const clear = () => {
         Display.clearBoard()
         finish = false
