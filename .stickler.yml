@@ -1,4 +1,4 @@
+
 linters:
-    flake8:
-    eslint:
-        config: './.eslintrc.json
+  eslint:
+    config: './eslint.config'
