@@ -145,7 +145,6 @@ const GamePlay = (() => {
 			}
 		})
 		if(counter === 9) {
-			console.log("draw game")
 			return true
 		}
 		return false
