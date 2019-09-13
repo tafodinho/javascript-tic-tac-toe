@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="input">
+            <input type="text" id="player-name" placeholder="Enter player name and press enter to start game">
+            <p>Player: <span id="player"></span></p>
+            <p>Marker: X</p>
+        </div>
+        
+        <h1>Tic Tac Toe</h1>
+        <h2 class="message" id="message"></h2>
+        <table>
+        <tr>
+            <td align="center" onclick="GamePlay.makeMove(0)"><span class="marker" id="0"></span></td>
+            <td align="center" class="vert" onclick="GamePlay.makeMove(1)"><span class="marker" id="1"></span></td>
+            <td align="center" onclick="GamePlay.makeMove(2)"><span class="marker" id="2"></span></td>
+        </tr>
+        <tr>
+            <td align="center" class="hori" onclick="GamePlay.makeMove(3)"><span class="marker" id="3"></span></td>
+            <td align="center" class="vert hori" onclick="GamePlay.makeMove(4)"><span class="marker" id="4"></span></td>
+            <td align="center" class="hori" onclick="GamePlay.makeMove(5)"><span class="marker" id="5"></span></td>
+        </tr>
+        <tr>
+            <td align="center" onclick="GamePlay.makeMove(6)"><span class="marker" id="6"></span></td>
+            <td align="center" class="vert" onclick="GamePlay.makeMove(7)"><span class="marker" id="7"></span></td>
+            <td align="center" onclick="GamePlay.makeMove(8)"><span class="marker" id="8"></span></td>
+        </tr>
+        </table>
+        <button class="btn-clear" id="clear" onclick="document.location.reload(true)">clear</button>
+     </div>
+</body>
+<script src="assets/scripts/game.js"></script>
+</html>

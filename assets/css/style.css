@@ -1,0 +1,50 @@
+h1 {
+    text-align: center;
+}
+  td {
+    width: 100px;
+    height: 100px;
+  }
+  table {
+    margin: 5px auto;
+  }
+  .vert {
+    border-left: 2px solid #01bbc2;
+    border-right: 2px solid #01bbc2;
+  }
+  .hori {
+    border-top: 2px solid #01bbc2;
+    border-bottom: 2px solid #01bbc2;
+  }
+  .marker {
+      text-align: center;
+      color: #f1be32;
+      font-weight: 800;
+      font-size: 50px;
+  }
+  .main-container {
+    margin-top: 50px;
+  }
+  .btn-clear {
+    padding: 5px 33px 5px 33px;
+    border: solid 1px #01bbc2;
+    background: none;
+    margin: 0 auto;
+    background: #f1be32;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  td:hover {
+      cursor: pointer
+  }
+  .message {
+      text-align: center;
+      color: #d54e41;
+  }
+  .input {
+    text-align: center;
+  }
+  .input input {
+    width: 400px;
+  }
